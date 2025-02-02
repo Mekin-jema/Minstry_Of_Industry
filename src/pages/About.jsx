@@ -50,6 +50,10 @@ The **Ethiopian Ministry of Industry (MoI)** has experienced significant transfo
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
+        <h1 className="text-3xl font-bold text-center text-blue-900 mb-8">
+          About the Ministry of Industry
+        </h1>
+
         {/* History Section */}
         <div id="history" className="flex flex-col md:flex-row gap-8 mb-12">
           <ReactMarkdown className="prose lg:prose-xl text-gray-700 flex-1">

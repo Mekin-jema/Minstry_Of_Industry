@@ -18,23 +18,30 @@ import ContactPage from "./Contact";
 const images = [image4, image5, image6, image7, image8, image9, image10];
 
 const Home = () => {
-  const [textVisible, setTextVisible] = useState(true); // Track if the text is visible
+  const [textVisible, setTextVisible] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(2);
 
   const handleLoopDone = () => {
-    setTextVisible(false); // Hide the text after the loop finishes
+    setTextVisible(false);
+  };
+
+  const handleSlideChange = (index) => {
+    console.log("Active Slide:", index); // Debugging
+    setActiveSlide(index);
   };
 
   return (
-    <div className="relative w-full h-full ">
-      <section className="relative w-full h-[600px] flex flex-col justify-center items-center text-white overflow-hidden left-0 ">
+    <div className="relative w-full h-full">
+      <section className="relative w-full h-[600px] flex flex-col justify-center items-center text-white overflow-hidden left-0">
         {/* Image Slider with text on top */}
         <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
           <Carousel
             autoPlay
             infiniteLoop
-            interval={3000} // Adjust interval for smooth transitions
+            interval={3000}
             showThumbs={false}
             showStatus={false}
+            onChange={handleSlideChange} // Detects slide change
           >
             {images.map((img, index) => (
               <div key={index}>
@@ -56,33 +63,58 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            {/* Typewriter Effect with react-simple-typewriter */}
             {textVisible && (
               <Typewriter
                 words={[
                   "Welcome to the Ministry of Industry, driving growth, innovation, and sustainability in Ethiopia's industrial sector.",
                 ]}
-                loop={1} // Set loop to 1 for one-time only
+                loop={1}
                 cursor
-                cursorStyle=""
-                typeSpeed={90} // Slower typing speed for a more dramatic effect
-                deleteSpeed={50} // Adjusted delete speed for smoother transitions
-                delaySpeed={1500} // Delay between each phrase
-                onLoopDone={handleLoopDone} // Callback to hide the text after finishing
+                typeSpeed={90}
+                deleteSpeed={50}
+                delaySpeed={1500}
+                onLoopDone={handleLoopDone}
               />
             )}
           </motion.h2>
         </div>
       </section>
-      <section>
-        <AboutMinistry />
-      </section>
-      <section>
-        <Services />
-      </section>
-      <section>
-        <ContactPage />
-      </section>
+
+      {/* Animate components when a specific slide appears */}
+      <div>
+        {activeSlide === 2 && (
+          <motion.div
+            key="about"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <AboutMinistry />
+          </motion.div>
+        )}
+
+        {activeSlide === 4 && (
+          <motion.div
+            key="services"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <Services />
+          </motion.div>
+        )}
+
+        {activeSlide === 6 && (
+          <motion.div
+            key="contact"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <ContactPage />
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 };
