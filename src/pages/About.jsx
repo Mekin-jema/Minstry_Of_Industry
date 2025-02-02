@@ -110,48 +110,65 @@ The **Ethiopian Ministry of Industry (MoI)** has experienced significant transfo
                   "Ensure sustainable industrial practices.",
                 ],
               },
-            ].map(({ title, text, color, icon, details }, index) => (
-              <motion.div
-                key={index}
-                initial={{
-                  opacity: 0,
-                  x: index === 0 ? -20 : index === 2 ? 20 : 0,
-                }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 * index }}
-                className={`p-6 bg-white rounded-lg shadow-md flex flex-col items-center text-center border-t-4 border-${color}-600 hover:shadow-2xl hover:transition duration-300 cursor-pointer`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-12 w-12 text-${color}-600 mb-4`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+            ].map(({ title, text, color, icon, details }, index) => {
+              let colorClass;
+              switch (color) {
+                case "blue":
+                  colorClass = "text-blue-600";
+                  break;
+                case "green":
+                  colorClass = "text-green-600";
+                  break;
+                case "purple":
+                  colorClass = "text-purple-600";
+                  break;
+                default:
+                  colorClass = "text-gray-600";
+              }
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{
+                    opacity: 0,
+                    x: index === 0 ? -20 : index === 2 ? 20 : 0,
+                  }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 * index }}
+                  className={`p-6 bg-white rounded-lg shadow-md flex flex-col items-center text-center border-t-4 border-${color}-600 hover:shadow-2xl hover:transition duration-300 cursor-pointer`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d={icon}
-                  />
-                </svg>
-                <h2 className={`text-xl font-bold text-${color}-900 mb-2`}>
-                  {title}
-                </h2>
-                <p className="text-gray-700">{text}</p>
-                {details && (
-                  <div className="mt-4 text-left">
-                    <ul className="list-disc list-inside">
-                      {details.map((detail, i) => (
-                        <li key={i} className="text-gray-700">
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </motion.div>
-            ))}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={`h-12 w-12 ${colorClass} mb-4`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d={icon}
+                    />
+                  </svg>
+                  <h2 className={`text-xl font-bold ${colorClass} mb-2`}>
+                    {title}
+                  </h2>
+                  <p className="text-gray-700">{text}</p>
+                  {details && (
+                    <div className="mt-4 text-left">
+                      <ul className="list-disc list-inside">
+                        {details.map((detail, i) => (
+                          <li key={i} className="text-gray-700">
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </motion.div>
