@@ -19,14 +19,13 @@ const images = [image4, image5, image6, image7, image8, image9, image10];
 
 const Home = () => {
   const [textVisible, setTextVisible] = useState(true);
-  const [activeSlide, setActiveSlide] = useState(2);
+  const [activeSlide, setActiveSlide] = useState(6); // Adjust to start from the first slide
 
   const handleLoopDone = () => {
     setTextVisible(false);
   };
 
   const handleSlideChange = (index) => {
-    console.log("Active Slide:", index); // Debugging
     setActiveSlide(index);
   };
 
@@ -38,10 +37,11 @@ const Home = () => {
           <Carousel
             autoPlay
             infiniteLoop
-            interval={3000}
+            interval={5000}
             showThumbs={false}
             showStatus={false}
             onChange={handleSlideChange} // Detects slide change
+            selectedItem={activeSlide} // Ensures correct slide is shown
           >
             {images.map((img, index) => (
               <div key={index}>
@@ -66,7 +66,9 @@ const Home = () => {
             {textVisible && (
               <Typewriter
                 words={[
-                  "Welcome to the Ministry of Industry, driving growth, innovation, and sustainability in Ethiopia's industrial sector.",
+                  "Welcome to the Ministry of Industry.",
+                  "We are here to serve you.",
+                  "Contact us for more information.",
                 ]}
                 loop={1}
                 cursor
@@ -80,9 +82,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Animate components when a specific slide appears */}
+      {/* Render only the active slide component */}
       <div>
-        {activeSlide === 2 && (
+        {activeSlide === 6 && (
           <motion.div
             key="about"
             initial={{ opacity: 0, y: 20 }}
@@ -93,7 +95,7 @@ const Home = () => {
           </motion.div>
         )}
 
-        {activeSlide === 4 && (
+        {activeSlide === 6 && (
           <motion.div
             key="services"
             initial={{ opacity: 0, y: 20 }}
