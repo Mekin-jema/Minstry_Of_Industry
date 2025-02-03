@@ -1,35 +1,17 @@
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+// db/connect.js
+import mongoose from 'mongoose';
 
-dotenv.config();
-
-const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: `${process.env.DB_PASSWORD}##`, // Removed `##`
-  database: process.env.DB_NAME,
-});
-
-// Function to test the database connection
-const testDBConnection = async () => {
+const connectDB = async () => {
   try {
-    const connection = await db.getConnection();
-    console.log("Database connection successful!");
-    connection.release();
-  } catch (error) {
-    console.error("Database connection failed:", error.message);
-  }
-};
-
-export default testDBConnection;
-
-// Function to execute queries with error handling
-export const query = async (query, params) => {
-  try {
-    const [rows] = await db.execute(query, params);
-    return rows;
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected');
   } catch (err) {
-    console.error("Query execution error:", err.message);
-    throw err;
+    console.error('MongoDB connection error:');
+    process.exit(1);
   }
 };
+
+export default connectDB;
