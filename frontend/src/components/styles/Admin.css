@@ -1,0 +1,12 @@
+.admin{
+   position: fixed;
+   background: green;
+   top:198px;
+   bottom: 0;
+   left:4px;
+   width: 90px;
+   z-index: 1;
+   border: 1px solid gray;
+   min-height: 842px;
+   border-radius: 0 0 0px 5px;
+}

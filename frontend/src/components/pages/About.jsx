@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { useState } from "react";
-import Image4 from "../assets/image4.jpg";
-import Image5 from "../assets/image5.jpg";
-import Image6 from "../assets/image6.jpg";
-import Image7 from "../assets/image7.jpg";
-import Image8 from "../assets/image8.jpg";
+import Image4 from "../../assets/image4.jpg";
+import Image5 from "../../assets/image5.jpg";
+import Image6 from "../../assets/image6.jpg";
+import Image7 from "../../assets/image7.jpg";
+import Image8 from "../../assets/image8.jpg";
 
 const AboutMinistry = () => {
   const content = `

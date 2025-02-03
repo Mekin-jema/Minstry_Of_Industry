@@ -1,0 +1,24 @@
+/* .home{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+   color: black;
+   margin-left: 20px;
+   text-decoration: none;
+   padding: 10px;
+   width: 100%;
+   min-height: 35vh;
+     
+
+
+.home-links{
+   display: flex;
+   justify-content: space-between; 
+}
+.home-links a{
+   color: #333;
+   margin-left: 20px;
+   text-decoration: none;
+} */
