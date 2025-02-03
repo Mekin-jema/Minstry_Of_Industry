@@ -8,7 +8,6 @@ const upload = multer({ storage });
 
 // Read and process CSV file from the frontend
 const uploadFile = async (req, res) => {
-  console.log("Uploading file...");
   try {
     const results = [];
     const columns = Array.isArray(req.query.column) ? req.query.column : req.query.column?.split(",");
@@ -63,7 +62,6 @@ const uploadFile = async (req, res) => {
     return res.json({ data: results });
 
   } catch (error) {
-    console.error("Error reading file:", error);
     return res.status(500).json({ message: "Error reading file" });
   }
 };

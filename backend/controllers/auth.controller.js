@@ -10,18 +10,14 @@ export const signin = async (req, res) => {
     // Check if user already exists
     const existingUser = await Employee.findOne({ email });
     if (existingUser) {
-      console.log("User already exists.");
       return res.status(409).json({ message: 'User already exists' });
     }
 
     // Create new user
     const newUser = new Employee({ name, email, password });
     await newUser.save();
-
-    console.log("User created successfully.");
     res.status(201).json({ message: 'User created successfully', user: { id: newUser._id, name, email } });
   } catch (err) {
-    console.error("Error during signup:", err.message);
     res.status(500).json({ message: 'Internal server error', error: err.message });
   }
 };
@@ -41,22 +37,18 @@ export const login = async (req, res) => {
     // Validate password
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
-      console.log("Invalid password.");
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     // Generate JWT token
     const payload = { id: user._id, email: user.email };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    console.log("Login successful.");
     res.status(200).json({
       message: 'Login successful',
       user: { id: user._id, name: user.name, email: user.email },
       token
     });
   } catch (err) {
-    console.error("Error during login:", err.message);
     res.status(500).json({ message: 'Internal server error', error: err.message });
   }
 };

@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import uploadFile from "./routes/uploadFile.route.js";
-import CSVFileRouter from "./routes/readCSVFile.routes.js";
 import authRouter from "./routes/auth.route.js";
 import db from './db/connect.js';
 import dotenv from 'dotenv';
@@ -17,8 +16,7 @@ app.use(cors({
   allowedHeaders: 'Content-Type',
 }));
 // Use the uploadFile route
-app.use("/api", uploadFile); // Prefix all routes with '/api'
-app.use("/api", CSVFileRouter);
+app.use("/api", uploadFile); 
 app.use("/api", authRouter);
 // Start the server
 app.listen(port, () => {
